@@ -112,7 +112,7 @@
       line-height:1.35;
     }
 
-    /* errore inline (invece della schermata "Hmm...") */
+    /* errore inline */
     .inlineErr{
       display:none;
       margin-top:10px;
@@ -208,7 +208,7 @@
       to{ transform: translateY(110vh) rotate(360deg); opacity:0.95; }
     }
 
-    /* ✅ popup migliorato (posizione buona sia desktop che mobile) */
+    /* popup troll */
     .pop{
       position:absolute;
       top:14px;
@@ -237,10 +237,9 @@
       font-size:14px;
       box-shadow: 0 10px 24px rgba(0,0,0,.12);
     }
-
     @media (max-width: 480px){
       .pop{
-        position:relative;   /* ✅ su mobile non copre il titolo */
+        position:relative;
         top:auto; right:auto;
         margin:12px auto 0;
         width:100%;
@@ -274,11 +273,10 @@
         Mi raccomando: prova a inserire <b>Gianfilippo</b> 😤
       </div>
 
-      <!-- ✅ sostituisce la schermata "Hmm..." -->
       <div class="inlineErr" id="inlineErr">Hmm… non credo 😅 riprova</div>
     </div>
 
-    <!-- 2) se al primo tentativo scrive "gianfilippo" -->
+    <!-- 2) SOLO se al primo tentativo scrive "matteo" -->
     <div class="screen" id="sFirstGian">
       <div class="emojiBox">🥱</div>
       <h1>No davvero</h1>
@@ -290,17 +288,14 @@
       </div>
     </div>
 
-    <!-- 3) TROLL -->
+    <!-- 3) TROLL (se scrive "gianfilippo" al primo tentativo, va direttamente qui) -->
     <div class="screen" id="sTroll">
       <div class="emojiBox">🚫</div>
       <h1>Complimenti 😈</h1>
       <p>Sei stata bloccata.<br>Ora installo un <b>virus qualianese</b> sul tuo telefono…</p>
 
-      <!-- ✅ popup (migliorato e posizionato bene) -->
       <div class="pop">
-        <p>
-          ammetto che ho sbagliato: il mio valentino è di Villaricca 🥰
-        </p>
+        <p>scherzavo, IL MIO VALENTINO è di Villaricca 🥰</p>
         <div class="row">
           <button class="ghost" id="backFromTroll">Clicca qui per tornare indietro</button>
         </div>
@@ -312,7 +307,6 @@
       <div class="pill">per: <span id="forName">Anna</span> 🦥</div>
       <div class="emojiBox">🐰</div>
 
-      <!-- ✅ niente 🦥 accanto ad Anna -->
       <div class="bigTitle">
         <span id="forName2">Anna</span>, vuoi essere la mia Valentina?
       </div>
@@ -348,9 +342,8 @@
   const input = document.getElementById("nameInput");
   const err = document.getElementById("inlineErr");
 
-  // ✅ primo tentativo: se scrive "gianfilippo" va a "No davvero"
+  // ✅ serve solo per capire "primo tentativo"
   let firstAttempt = true;
-  let gianAlreadyTeased = false; // dopo la schermata "No davvero", la prossima volta -> troll
 
   // cuori
   const hearts = ["💗","💖","💘","💝","❤️","💕"];
@@ -382,23 +375,22 @@
     const val = normalize(input.value);
     if(!val){ input.focus(); return; }
 
-    // ✅ primo tentativo + scrive gianfilippo -> schermata "No davvero"
-    if(firstAttempt && val === PAROLA_TROLL && !gianAlreadyTeased){
+    // ✅ SOLO al primo tentativo: se scrive "matteo" -> "No davvero..."
+    if(firstAttempt && val === PAROLA_OK){
       firstAttempt = false;
-      gianAlreadyTeased = true;
       return show("sFirstGian");
     }
 
-    // dopo il primo invio, non è più first
+    // dopo il primo invio
     if(firstAttempt) firstAttempt = false;
 
-    // ✅ se ha già visto "No davvero" e scrive gianfilippo -> troll
-    if(val === PAROLA_TROLL && gianAlreadyTeased) return show("sTroll");
+    // ✅ se scrive "gianfilippo" -> troll (sempre, anche al primo tentativo)
+    if(val === PAROLA_TROLL) return show("sTroll");
 
-    // normale: se scrive matteo -> Anna
+    // ✅ se scrive "matteo" (dopo) -> Anna
     if(val === PAROLA_OK) return show("s2");
 
-    // ✅ niente schermata "Hmm..." -> solo errore inline
+    // altro nome -> errore inline
     flashErr();
   }
 
@@ -444,4 +436,3 @@
 
 </body>
 </html>
-
