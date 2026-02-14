@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>💘</title>
   <style>
     :root{
@@ -15,10 +15,16 @@
       display:flex; align-items:center; justify-content:center;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
       background: radial-gradient(circle at top, var(--bg2), var(--bg1));
-      overflow:hidden; color:var(--txt);
+      color:var(--txt);
+
+      /* ✅ mobile: centratura + safe area */
+      padding: max(16px, env(safe-area-inset-top)) 16px max(16px, env(safe-area-inset-bottom));
+      overflow-x:hidden;
+      overflow-y:auto;
     }
     .wrap{
       width:min(560px, 92vw);
+      margin:auto;
       background:var(--card);
       border:1px solid #ffffff66;
       border-radius:26px;
@@ -76,7 +82,6 @@
     .screen{display:none}
     .screen.active{display:block}
 
-    /* tip grande sotto Continua */
     .bigTip{
       margin-top:12px;
       font-size:18px;
@@ -85,7 +90,6 @@
       line-height:1.35;
     }
 
-    /* area bottoni */
     .btnArea{
       position:relative;
       width:100%;
@@ -109,7 +113,6 @@
       padding:16px 18px;
     }
 
-    /* Titolo Anna più grande */
     .bigTitle{
       font-size:36px;
       font-weight:950;
@@ -123,7 +126,6 @@
       opacity:.95;
     }
 
-    /* finale */
     .finalBox{
       width:100%;
       border-radius:20px;
@@ -150,18 +152,62 @@
       font-weight:950;
     }
 
-    /* cuori che cadono */
+    /* cuori */
     .heart{
-      position:absolute; top:-30px;
+      position:fixed; top:-30px;
       font-size:18px;
       animation: fall linear forwards;
       opacity:.9;
       user-select:none;
       pointer-events:none;
       filter: drop-shadow(0 6px 6px rgba(0,0,0,.18));
+      z-index:0;
     }
     @keyframes fall{
       to{ transform: translateY(110vh) rotate(360deg); opacity:0.95; }
+    }
+
+    /* ✅ Popup affianco (modal) */
+    .modal{
+      position:absolute;
+      right:18px;
+      top:18px;
+      width:min(340px, 86%);
+      background:#fff;
+      border:1px solid #00000010;
+      border-radius:18px;
+      padding:14px 14px 12px;
+      box-shadow: 0 18px 50px rgba(0,0,0,.18);
+      text-align:left;
+      z-index:5;
+    }
+    .modal h3{
+      margin:0 0 8px;
+      font-size:16px;
+      font-weight:950;
+    }
+    .modal p{
+      margin:0 0 10px;
+      font-size:15px;
+      font-weight:800;
+      opacity:.95;
+    }
+    .modal .small{
+      font-size:13px;
+      font-weight:800;
+      opacity:.8;
+      margin-top:-4px;
+    }
+
+    /* mobile: modal non copre */
+    @media (max-width: 480px){
+      .modal{
+        position:relative;
+        right:auto; top:auto;
+        margin:12px auto 0;
+        width:100%;
+        text-align:center;
+      }
     }
   </style>
 </head>
@@ -184,9 +230,20 @@
         <button class="primary" id="goBtn">Continua</button>
       </div>
 
-      <!-- MODIFICA: tolto tutto, resta solo questa frase -->
       <div class="bigTip">
         Mi raccomando: prova a inserire <b>Gianfilippo</b> 😤
+      </div>
+    </div>
+
+    <!-- ✅ NUOVA SCHERMATA: primo tentativo "matteo" -->
+    <div class="screen" id="sFirstMatteo">
+      <div class="emojiBox">😤</div>
+      <h1>No davvero</h1>
+      <p style="font-size:18px; font-weight:900;">
+        Prova a scrivere <b>Gianfilippo</b>!!
+      </p>
+      <div class="row" style="margin-top:12px">
+        <button class="ghost" id="backFromFirstMatteo">Ok, riprovo</button>
       </div>
     </div>
 
@@ -196,13 +253,16 @@
       <h1>Complimenti 😈</h1>
       <p>Sei stata bloccata.<br>Ora installo un <b>virus qualianese</b> sul tuo telefono…</p>
 
-      <!-- MODIFICA: testo normale, poi tasto separato -->
-      <p style="font-size:18px; font-weight:900; margin-top:14px;">
-        Ho sbagliato, IL MIO VALENTINO è di Villaricca 🥰
-      </p>
-
-      <div class="row" style="margin-top:10px">
-        <button class="ghost" id="backFromTroll">Clicca qui per tornare indietro</button>
+      <!-- ✅ popup affianco -->
+      <div class="modal">
+        <h3>Mini confessione 😅</h3>
+        <p>ammetto che Ho sbagliato, IL MIO VALENTINO è di Villaricca 🥰</p>
+        <div class="row" style="justify-content:center; margin-top:8px">
+          <button class="ghost" id="backFromTroll" style="min-width:unset; padding:12px 14px;">
+            Clicca qui per tornare indietro
+          </button>
+        </div>
+        <div class="small">promesso 😇</div>
       </div>
     </div>
 
@@ -222,9 +282,9 @@
       <div class="pill">per: <span id="forName">Anna</span> 🦥</div>
       <div class="emojiBox">🐰</div>
 
-      <!-- MODIFICA: "Anna 🦥, vuoi essere la mia Valentina?" -->
+      <!-- ✅ tolto 🦥 accanto al nome nel titolo -->
       <div class="bigTitle">
-        <span id="forName2">Anna</span> 🦥, vuoi essere la mia Valentina?
+        <span id="forName2">Anna</span>, vuoi essere la mia Valentina?
       </div>
 
       <div class="btnArea" id="btnArea">
@@ -255,6 +315,9 @@
   document.getElementById("forName").textContent = NOME_DESTINATARIA;
   document.getElementById("forName2").textContent = NOME_DESTINATARIA;
 
+  // ✅ primo tentativo: se scrive "matteo" -> schermata nuova
+  let firstAttempt = true;
+
   // cuori
   const hearts = ["💗","💖","💘","💝","❤️","💕"];
   setInterval(() => {
@@ -266,11 +329,13 @@
     h.style.fontSize = (14 + Math.random()*16) + "px";
     document.body.appendChild(h);
     setTimeout(()=>h.remove(), 6500);
-  }, 240);
+  }, 260);
 
   function show(id){
     document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
     document.getElementById(id).classList.add("active");
+    // ✅ quando cambi schermata, rimetti scroll su top (mobile)
+    window.scrollTo({top:0, behavior:"instant"});
   }
 
   const input = document.getElementById("nameInput");
@@ -282,6 +347,15 @@
     const val = normalize(input.value);
     if(!val){ input.focus(); return; }
 
+    // ✅ condizione nuova: SOLO al primo tentativo
+    if(firstAttempt && val === PAROLA_OK){
+      firstAttempt = false;
+      return show("sFirstMatteo");
+    }
+
+    // dopo il primo tentativo, la procedura è normale
+    if(firstAttempt) firstAttempt = false;
+
     if(val === PAROLA_TROLL) return show("sTroll");
     if(val === PAROLA_OK) return show("s2");
 
@@ -291,6 +365,7 @@
   goBtn.addEventListener("click", go);
   input.addEventListener("keydown", (e)=>{ if(e.key === "Enter") go(); });
 
+  // back
   document.getElementById("backFromTroll").addEventListener("click", ()=>{
     input.value = "";
     show("s1");
@@ -299,6 +374,11 @@
   document.getElementById("backFromWrong").addEventListener("click", ()=>{
     show("s1");
     input.select();
+    input.focus();
+  });
+  document.getElementById("backFromFirstMatteo").addEventListener("click", ()=>{
+    input.value = "";
+    show("s1");
     input.focus();
   });
 
