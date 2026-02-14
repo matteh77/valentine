@@ -76,20 +76,13 @@
     .screen{display:none}
     .screen.active{display:block}
 
-    /* tip grandi */
+    /* tip grande sotto Continua */
     .bigTip{
       margin-top:12px;
       font-size:18px;
       font-weight:900;
       opacity:.95;
       line-height:1.35;
-    }
-    .bigTip .sub{
-      display:block;
-      margin-top:8px;
-      font-size:17px;
-      font-weight:900;
-      opacity:.95;
     }
 
     /* area bottoni */
@@ -116,7 +109,7 @@
       padding:16px 18px;
     }
 
-    /* Anna più grande */
+    /* Titolo Anna più grande */
     .bigTitle{
       font-size:36px;
       font-weight:950;
@@ -191,9 +184,9 @@
         <button class="primary" id="goBtn">Continua</button>
       </div>
 
+      <!-- MODIFICA: tolto tutto, resta solo questa frase -->
       <div class="bigTip">
-        Prova a scrivere <b>Gianfilippo</b>! 😤
-        <span class="sub">Mi raccomando: prova a inserire <b>Matteo</b> 😤</span>
+        Mi raccomando: prova a inserire <b>Gianfilippo</b> 😤
       </div>
     </div>
 
@@ -203,10 +196,13 @@
       <h1>Complimenti 😈</h1>
       <p>Sei stata bloccata.<br>Ora installo un <b>virus qualianese</b> sul tuo telefono…</p>
 
-      <div class="bigHint" style="font-size:18px">Clicca qui per tornare indietro 👇</div>
+      <!-- MODIFICA: testo normale, poi tasto separato -->
+      <p style="font-size:18px; font-weight:900; margin-top:14px;">
+        Ho sbagliato, IL MIO VALENTINO è di Villaricca 🥰
+      </p>
 
       <div class="row" style="margin-top:10px">
-        <button class="ghost" id="backFromTroll">Ho sbagliato, IL MIO VALENTINO è di Villaricca 🥰</button>
+        <button class="ghost" id="backFromTroll">Clicca qui per tornare indietro</button>
       </div>
     </div>
 
@@ -226,8 +222,9 @@
       <div class="pill">per: <span id="forName">Anna</span> 🦥</div>
       <div class="emojiBox">🐰</div>
 
+      <!-- MODIFICA: "Anna 🦥, vuoi essere la mia Valentina?" -->
       <div class="bigTitle">
-        <span id="forName2">Anna</span>, vuoi essere la mia Valentina?
+        <span id="forName2">Anna</span> 🦥, vuoi essere la mia Valentina?
       </div>
 
       <div class="btnArea" id="btnArea">
@@ -284,8 +281,10 @@
   function go(){
     const val = normalize(input.value);
     if(!val){ input.focus(); return; }
+
     if(val === PAROLA_TROLL) return show("sTroll");
     if(val === PAROLA_OK) return show("s2");
+
     show("sWrong");
   }
 
