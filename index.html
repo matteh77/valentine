@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>💘</title>
+  <style>
+    :root{
+      --bg1:#ff6fa4; --bg2:#ffd6e4; --card:#ffffffd6; --txt:#222;
+      --pink:#ff2f7a; --soft:#f3f3f3;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; min-height:100vh;
+      display:flex; align-items:center; justify-content:center;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      background: radial-gradient(circle at top, var(--bg2), var(--bg1));
+      overflow:hidden; color:var(--txt);
+    }
+    .wrap{
+      width:min(560px, 92vw);
+      background:var(--card);
+      border:1px solid #ffffff66;
+      border-radius:26px;
+      padding:22px 18px;
+      box-shadow: 0 22px 70px rgba(0,0,0,.2);
+      backdrop-filter: blur(10px);
+      text-align:center;
+      position:relative;
+    }
+    h1{margin:8px 0 6px; font-size:28px}
+    p{margin:0 0 12px; opacity:.85; line-height:1.35}
+
+    .pill{
+      display:inline-block;
+      padding:7px 10px;
+      border-radius:999px;
+      background:#fff;
+      font-size:13px;
+      font-weight:700;
+      opacity:.9;
+      margin-bottom:8px;
+    }
+    .emojiBox{
+      width:120px; height:120px;
+      margin:8px auto 10px;
+      border-radius:22px;
+      background:#fff;
+      display:grid; place-items:center;
+      box-shadow: 0 12px 24px rgba(0,0,0,.12);
+      font-size:64px;
+    }
+    .row{display:flex; gap:10px; justify-content:center; flex-wrap:wrap}
+    input{
+      width:min(360px, 90%);
+      padding:14px 14px;
+      border-radius:14px;
+      border:1px solid #00000014;
+      outline:none;
+      font-size:16px;
+    }
+    button{
+      border:none; cursor:pointer;
+      padding:14px 18px;
+      border-radius:14px;
+      font-weight:800;
+      font-size:16px;
+      box-shadow: 0 10px 20px rgba(0,0,0,.12);
+      transition: transform .12s ease;
+      min-width:150px;
+    }
+    button:active{transform: scale(.98)}
+    .primary{background:var(--pink); color:#fff}
+    .ghost{background:var(--soft); color:#222}
+
+    .screen{display:none}
+    .screen.active{display:block}
+
+    /* tip grandi */
+    .bigTip{
+      margin-top:12px;
+      font-size:18px;
+      font-weight:900;
+      opacity:.95;
+      line-height:1.35;
+    }
+    .bigTip .sub{
+      display:block;
+      margin-top:8px;
+      font-size:17px;
+      font-weight:900;
+      opacity:.95;
+    }
+
+    /* area bottoni */
+    .btnArea{
+      position:relative;
+      width:100%;
+      height:150px;
+      margin-top:14px;
+      border-radius:18px;
+      background: rgba(255,255,255,.55);
+      border:1px solid #ffffff7a;
+      overflow:hidden;
+    }
+    #yesBtn{position:absolute; left:50%; top:50%; transform:translate(-120%, -50%);}
+    #noBtn{
+      position:absolute; left:50%; top:50%;
+      transform:translate(30%, -50%);
+      background:#efefef; color:#333;
+      min-width:120px; padding:12px 14px;
+    }
+    #yesBtn.big{
+      min-width:200px;
+      font-size:18px;
+      padding:16px 18px;
+    }
+
+    /* Anna più grande */
+    .bigTitle{
+      font-size:36px;
+      font-weight:950;
+      line-height:1.1;
+      margin-top:10px;
+    }
+    .bigHint{
+      margin-top:16px;
+      font-size:20px;
+      font-weight:900;
+      opacity:.95;
+    }
+
+    /* finale */
+    .finalBox{
+      width:100%;
+      border-radius:20px;
+      background:#fff;
+      border:1px solid #00000010;
+      padding:26px 16px;
+      box-shadow: 0 18px 50px rgba(0,0,0,.14);
+      margin-top:10px;
+    }
+    .finalBig{
+      font-size:36px;
+      font-weight:950;
+      margin:8px 0 6px;
+    }
+    .finalSub{
+      font-size:20px;
+      font-weight:800;
+      opacity:.92;
+      margin:0;
+    }
+    .finalSign{
+      margin-top:12px;
+      font-size:20px;
+      font-weight:950;
+    }
+
+    /* cuori che cadono */
+    .heart{
+      position:absolute; top:-30px;
+      font-size:18px;
+      animation: fall linear forwards;
+      opacity:.9;
+      user-select:none;
+      pointer-events:none;
+      filter: drop-shadow(0 6px 6px rgba(0,0,0,.18));
+    }
+    @keyframes fall{
+      to{ transform: translateY(110vh) rotate(360deg); opacity:0.95; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="wrap">
+
+    <!-- 1) INIZIO -->
+    <div class="screen active" id="s1">
+      <div class="pill">💌 Mini sorpresa</div>
+      <div class="emojiBox">💘</div>
+      <h1>Hai una persona speciale?</h1>
+      <p>Scrivi il suo nome qui sotto 👇</p>
+
+      <div class="row" style="margin-top:10px">
+        <input id="nameInput" placeholder="Scrivi il nome..." autocomplete="off" />
+      </div>
+
+      <div class="row" style="margin-top:12px">
+        <button class="primary" id="goBtn">Continua</button>
+      </div>
+
+      <div class="bigTip">
+        Prova a scrivere <b>Gianfilippo</b>! 😤
+        <span class="sub">Mi raccomando: prova a inserire <b>Matteo</b> 😤</span>
+      </div>
+    </div>
+
+    <!-- 2) TROLL -->
+    <div class="screen" id="sTroll">
+      <div class="emojiBox">🚫</div>
+      <h1>Complimenti 😈</h1>
+      <p>Sei stata bloccata.<br>Ora installo un <b>virus qualianese</b> sul tuo telefono…</p>
+
+      <div class="bigHint" style="font-size:18px">Clicca qui per tornare indietro 👇</div>
+
+      <div class="row" style="margin-top:10px">
+        <button class="ghost" id="backFromTroll">Ho sbagliato, IL MIO VALENTINO è di Villaricca 🥰</button>
+      </div>
+    </div>
+
+    <!-- 3) SBAGLIATO -->
+    <div class="screen" id="sWrong">
+      <div class="emojiBox">🤨</div>
+      <h1>Hmm… non credo</h1>
+      <p>Se hai sbagliato a scrivere il nome,<br>clicca qui e riprova 🥰</p>
+
+      <div class="row" style="margin-top:12px">
+        <button class="ghost" id="backFromWrong">Torna indietro</button>
+      </div>
+    </div>
+
+    <!-- 4) ANNA -->
+    <div class="screen" id="s2">
+      <div class="pill">per: <span id="forName">Anna</span> 🦥</div>
+      <div class="emojiBox">🐰</div>
+
+      <div class="bigTitle">
+        <span id="forName2">Anna</span>, vuoi essere la mia Valentina?
+      </div>
+
+      <div class="btnArea" id="btnArea">
+        <button class="primary big" id="yesBtn">Sì 💖</button>
+        <button id="noBtn">No 🙃</button>
+      </div>
+
+      <div class="bigHint">Prova a cliccare “No”… se ci riesci 😚</div>
+    </div>
+
+    <!-- 5) FINALE -->
+    <div class="screen" id="sFinal">
+      <div class="pill">💘</div>
+      <div class="finalBox">
+        <div class="finalBig">Buon San Valentino 💝</div>
+        <p class="finalSub">Ti amo.</p>
+        <div class="finalSign">— Matteo</div>
+      </div>
+    </div>
+
+  </div>
+
+<script>
+  const NOME_DESTINATARIA = "Anna";
+  const PAROLA_OK = "matteo";
+  const PAROLA_TROLL = "gianfilippo";
+
+  document.getElementById("forName").textContent = NOME_DESTINATARIA;
+  document.getElementById("forName2").textContent = NOME_DESTINATARIA;
+
+  // cuori
+  const hearts = ["💗","💖","💘","💝","❤️","💕"];
+  setInterval(() => {
+    const h = document.createElement("div");
+    h.className = "heart";
+    h.textContent = hearts[Math.floor(Math.random()*hearts.length)];
+    h.style.left = Math.random()*100 + "vw";
+    h.style.animationDuration = (3 + Math.random()*3) + "s";
+    h.style.fontSize = (14 + Math.random()*16) + "px";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(), 6500);
+  }, 240);
+
+  function show(id){
+    document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+    document.getElementById(id).classList.add("active");
+  }
+
+  const input = document.getElementById("nameInput");
+  const goBtn = document.getElementById("goBtn");
+
+  const normalize = s => (s || "").trim().toLowerCase();
+
+  function go(){
+    const val = normalize(input.value);
+    if(!val){ input.focus(); return; }
+    if(val === PAROLA_TROLL) return show("sTroll");
+    if(val === PAROLA_OK) return show("s2");
+    show("sWrong");
+  }
+
+  goBtn.addEventListener("click", go);
+  input.addEventListener("keydown", (e)=>{ if(e.key === "Enter") go(); });
+
+  document.getElementById("backFromTroll").addEventListener("click", ()=>{
+    input.value = "";
+    show("s1");
+    input.focus();
+  });
+  document.getElementById("backFromWrong").addEventListener("click", ()=>{
+    show("s1");
+    input.select();
+    input.focus();
+  });
+
+  // NO che scappa
+  const noBtn = document.getElementById("noBtn");
+  const area = document.getElementById("btnArea");
+
+  function moveNo(){
+    const r = area.getBoundingClientRect();
+    const bw = noBtn.offsetWidth, bh = noBtn.offsetHeight;
+    const pad = 10;
+    const maxX = r.width - bw - pad*2;
+    const maxY = r.height - bh - pad*2;
+    const x = pad + Math.random()*maxX;
+    const y = pad + Math.random()*maxY;
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+    noBtn.style.transform = "translate(0,0)";
+  }
+
+  noBtn.addEventListener("mouseenter", moveNo);
+  noBtn.addEventListener("touchstart", (e)=>{ e.preventDefault(); moveNo(); }, {passive:false});
+
+  // YES -> finale
+  document.getElementById("yesBtn").addEventListener("click", ()=>{
+    show("sFinal");
+  });
+</script>
+</body>
+</html>
